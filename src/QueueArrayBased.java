@@ -1,14 +1,27 @@
 public class QueueArrayBased implements QueueInterface {
-  private final int MAX_QUEUE = 50; // maximum size of queue
+  private final int MAX_QUEUE; // maximum size of queue
   private Object[] items;
   private int front, back, count;
-  
-  public QueueArrayBased() {
-    items = new Object[MAX_QUEUE];  
+
+  public QueueArrayBased()
+  {
+    this(50);
+  }
+
+  public QueueArrayBased(int capacity)
+  {
+    if (capacity <= 0)
+    {
+      throw new IllegalArgumentException(
+              "Queue capacity must be greater than zero.");
+    }
+
+    MAX_QUEUE = capacity;
+    items = new Object[MAX_QUEUE];
     front = 0;
-    back = MAX_QUEUE-1; 
+    back = MAX_QUEUE - 1;
     count = 0;
-  }  // end default constructor
+  }
 
   // queue operations:
   public boolean isEmpty() {
