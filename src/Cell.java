@@ -55,4 +55,24 @@ public class Cell
     {
         this.visited = visited;
     }
+
+    public void removeTopWall()
+    {
+        topWall = false;
+    }
+
+    public void removeBottomWall()
+    {
+        bottomWall = false;
+    }
+
+    public void removeLeftWall()
+    {
+        leftWall = false;
+    }
+
+    public void removeRightWall()
+    {
+        rightWall = false;
+    }
 }

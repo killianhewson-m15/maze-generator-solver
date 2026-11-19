@@ -63,4 +63,49 @@ public class Maze
                 getCell(row, column - 1)
         };
     }
+
+    public void removeWallBetween(Cell first, Cell second)
+    {
+        if (first == null || second == null)
+        {
+            throw new IllegalArgumentException("Both cells must exist.");
+        }
+
+        if (getCell(first.getRow(), first.getColumn()) != first
+                || getCell(second.getRow(), second.getColumn()) != second)
+        {
+            throw new IllegalArgumentException(
+                    "Both cells must belong to this maze.");
+        }
+
+        int rowDifference = second.getRow() - first.getRow();
+        int columnDifference = second.getColumn() - first.getColumn();
+
+        if (Math.abs(rowDifference) + Math.abs(columnDifference) != 1)
+        {
+            throw new IllegalArgumentException(
+                    "Cells must be directly adjacent.");
+        }
+
+        if (rowDifference == -1)
+        {
+            first.removeTopWall();
+            second.removeBottomWall();
+        }
+        else if (rowDifference == 1)
+        {
+            first.removeBottomWall();
+            second.removeTopWall();
+        }
+        else if (columnDifference == -1)
+        {
+            first.removeLeftWall();
+            second.removeRightWall();
+        }
+        else
+        {
+            first.removeRightWall();
+            second.removeLeftWall();
+        }
+    }
 }
