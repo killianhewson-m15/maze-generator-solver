@@ -6,7 +6,11 @@ public class Main
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(() -> {
-            Maze maze = new Maze(3, 5);
+            Maze maze = new Maze(10, 10);
+
+            MazeGenerator generator = new MazeGenerator(maze);
+            generator.generate();
+
             MazePanel panel = new MazePanel(maze);
 
             JFrame frame = new JFrame("Maze Generator and Solver");
