@@ -17,6 +17,7 @@ public class Main
             System.out.println("Maze solved: " + solver.isSolved());
 
             MazePanel panel = new MazePanel(maze);
+            panel.setSolutionPath(solver.getPath());
 
             JFrame frame = new JFrame("Maze Generator and Solver");
 

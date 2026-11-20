@@ -10,6 +10,15 @@ public class MazePanel extends JPanel
 
     private final Maze maze;
 
+    private Cell[] solutionPath = new Cell[0];
+
+    public void setSolutionPath(Cell[] solutionPath)
+    {
+        this.solutionPath = solutionPath;
+        repaint();
+    }
+
+
     public MazePanel(Maze maze)
     {
         this.maze = maze;
@@ -25,6 +34,17 @@ public class MazePanel extends JPanel
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
+
+        g.setColor(new Color(144, 238, 144));
+
+        for (Cell cell : solutionPath)
+        {
+            int x = PADDING + cell.getColumn() * CELL_SIZE;
+            int y = PADDING + cell.getRow() * CELL_SIZE;
+
+            g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+        }
+
         g.setColor(Color.BLACK);
 
         for (int row = 0; row < maze.getRows(); row++)

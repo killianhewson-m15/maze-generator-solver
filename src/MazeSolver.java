@@ -98,4 +98,32 @@ public class MazeSolver
             step();
         }
     }
+
+    public Cell[] getPath()
+    {
+        if (!isSolved())
+        {
+            return new Cell[0];
+        }
+
+        StackReferenceBased pathStack = new StackReferenceBased();
+        Cell current = exit;
+        int length = 0;
+
+        while (current != null)
+        {
+            pathStack.push(current);
+            length++;
+            current = getPredecessor(current);
+        }
+
+        Cell[] path = new Cell[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            path[i] = (Cell) pathStack.pop();
+        }
+
+        return path;
+    }
 }
