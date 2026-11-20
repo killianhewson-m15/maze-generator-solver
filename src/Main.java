@@ -11,6 +11,11 @@ public class Main
             MazeGenerator generator = new MazeGenerator(maze);
             generator.generate();
 
+            MazeSolver solver = new MazeSolver(maze);
+            solver.solve();
+
+            System.out.println("Maze solved: " + solver.isSolved());
+
             MazePanel panel = new MazePanel(maze);
 
             JFrame frame = new JFrame("Maze Generator and Solver");
