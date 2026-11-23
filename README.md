@@ -37,6 +37,20 @@ The queue was adapted to accept a capacity based on the number of cells in the m
 
 The interface uses Swing, with a timer to animate generation and solving.
 
+### Class Structure and Coordinates
+
+Cell stores the information for one cell, while Maze manages the grid and
+wall removal. MazeGenerator and MazeSolver contain the algorithms.
+MazePanel draws the maze, and MazeAppPanel handles the controls.
+
+Grid coordinates are zero-based and stored as [row][column].
+The top-left cell is (0, 0), and the bottom-right cell is
+(rows - 1, columns - 1). Rows increase downwards and columns increase
+to the right.
+
+Core classes are in maze, interface classes in maze.ui, lab data
+structures in maze.structures, and tests in maze.tests.
+
 ## Testing
 
 The three test classes can be run individually in IntelliJ:
