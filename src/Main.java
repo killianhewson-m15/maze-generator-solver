@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.awt.Dimension;
 
 public class Main
 {
@@ -10,8 +11,11 @@ public class Main
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.add(new MazeAppPanel());
+
+            frame.setMinimumSize(new Dimension(550, 400));
             frame.pack();
-            frame.setResizable(false);
+            frame.setResizable(true);
+
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
