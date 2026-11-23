@@ -1,3 +1,10 @@
+package maze.tests;
+
+import maze.Cell;
+import maze.Maze;
+import maze.MazeGenerator;
+import maze.structures.StackReferenceBased;
+
 public class MazeGeneratorTest
 {
     public static void main(String[] args)

@@ -1,3 +1,5 @@
+package maze.structures;
+
 public interface QueueInterface
 {
 
@@ -12,7 +14,7 @@ public interface QueueInterface
   // Precondition: newItem is the item to be inserted.
   // Postcondition: If the operation was successful, newItem
   // is at the back of the queue. Some implementations
-  // may throw QueueException if newItem cannot be added
+  // may throw maze.structures.QueueException if newItem cannot be added
   // to the queue.
   public Object dequeue() throws QueueException;
   // Retrieves and removes the front of a queue.
@@ -20,7 +22,7 @@ public interface QueueInterface
   // Postcondition: If the queue is not empty, the item
   // that was added to the queue earliest is returned and
   // the item is removed. If the queue is empty, the
-  // operation is impossible and QueueException is thrown.
+  // operation is impossible and maze.structures.QueueException is thrown.
 
   public void dequeueAll();
   // Removes all items of a queue.
@@ -33,6 +35,6 @@ public interface QueueInterface
   // Postcondition: If the queue is not empty, the item
   // that was added to the queue earliest is returned.
   // If the queue is empty, the operation is impossible
-  // and QueueException is thrown.
+  // and maze.structures.QueueException is thrown.
 
-}  // end QueueInterface
+}  // end maze.structures.QueueInterface

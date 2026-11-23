@@ -1,3 +1,8 @@
+package maze.tests;
+
+import maze.structures.QueueArrayBased;
+import maze.structures.QueueException;
+
 public class QueueArrayBasedTest
 {
     public static void main(String[] args)

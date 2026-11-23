@@ -1,3 +1,5 @@
+package maze.structures;
+
 public interface StackInterface
 {
   public boolean isEmpty();
@@ -17,7 +19,7 @@ public interface StackInterface
   // Postcondition: If insertion is successful, newItem
   // is on the top of the stack.
   // Exception: Some implementations may throw
-  // StackException when newItem cannot be placed on
+  // maze.structures.StackException when newItem cannot be placed on
   // the stack.
 
   public Object pop() throws StackException;
@@ -26,7 +28,7 @@ public interface StackInterface
   // Postcondition: If the stack is not empty, the item
   // that was added most recently is removed from the
   // stack and returned.
-  // Exception: Throws StackException if the stack is
+  // Exception: Throws maze.structures.StackException if the stack is
   // empty.
 
   public Object peek() throws StackException;
@@ -35,7 +37,7 @@ public interface StackInterface
   // Postcondition: If the stack is not empty, the item
   // that was added most recently is returned. The
   // stack is unchanged.
-  // Exception: Throws StackException if the stack is
+  // Exception: Throws maze.structures.StackException if the stack is
   // empty.
 
-}  // end StackInterface
+}  // end maze.structures.StackInterface

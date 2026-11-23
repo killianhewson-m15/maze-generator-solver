@@ -1,3 +1,5 @@
+package maze.structures;
+
 public class Node
 {
   private Object item;
@@ -34,5 +36,5 @@ public class Node
   {
     return next;
   } // end getNext
-} // end class Node
+} // end class maze.structures.Node
 

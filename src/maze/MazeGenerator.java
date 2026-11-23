@@ -1,3 +1,6 @@
+package maze;
+
+import maze.structures.StackReferenceBased;
 import java.util.Random;
 
 public class MazeGenerator

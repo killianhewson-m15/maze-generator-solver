@@ -1,3 +1,5 @@
+package maze.structures;
+
 public class QueueException extends RuntimeException
 {
 
@@ -5,4 +7,4 @@ public class QueueException extends RuntimeException
   {
     super(s);
   }  // end constructor
-}  // end QueueException
+}  // end maze.structures.QueueException

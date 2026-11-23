@@ -1,3 +1,5 @@
+package maze;
+
 public class Cell
 {
     private final int row;

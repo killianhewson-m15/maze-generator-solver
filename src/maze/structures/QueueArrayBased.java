@@ -1,3 +1,5 @@
+package maze.structures;
+
 public class QueueArrayBased implements QueueInterface {
   private final int MAX_QUEUE; // maximum size of queue
   private Object[] items;
@@ -39,7 +41,7 @@ public class QueueArrayBased implements QueueInterface {
       ++count;
     }
     else {
-      throw new QueueException("QueueException on enqueue: "
+      throw new QueueException("maze.structures.QueueException on enqueue: "
                              + "Queue full");
     }  // end if
   }  // end enqueue
@@ -53,7 +55,7 @@ public class QueueArrayBased implements QueueInterface {
       return queueFront;
     }
     else {
-      throw new QueueException("QueueException on dequeue: "+
+      throw new QueueException("maze.structures.QueueException on dequeue: "+
                               "Queue empty");
     }   // end if
   }  // end dequeue
@@ -101,4 +103,4 @@ public class QueueArrayBased implements QueueInterface {
     System.out.println(" <- BACK");
   }
    
-} // end QueueArrayBased
+} // end maze.structures.QueueArrayBased

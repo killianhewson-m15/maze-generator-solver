@@ -1,3 +1,8 @@
+package maze.ui;
+
+import maze.Cell;
+import maze.Maze;
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;

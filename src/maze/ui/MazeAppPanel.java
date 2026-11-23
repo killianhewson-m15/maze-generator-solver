@@ -1,3 +1,10 @@
+package maze.ui;
+
+import maze.Cell;
+import maze.Maze;
+import maze.MazeGenerator;
+import maze.MazeSolver;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;

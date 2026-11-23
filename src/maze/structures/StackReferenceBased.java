@@ -1,3 +1,5 @@
+package maze.structures;
+
 public class StackReferenceBased implements StackInterface
 {
   private Node top;
@@ -36,7 +38,7 @@ public class StackReferenceBased implements StackInterface
     }
     else
     {
-      throw new StackException("StackException on " + "pop: stack empty");
+      throw new StackException("maze.structures.StackException on " + "pop: stack empty");
     }  // end if
   }  // end pop
   //============================================================================
@@ -59,7 +61,7 @@ public class StackReferenceBased implements StackInterface
     }
     else
     {
-      throw new StackException("StackException on " + "peek: stack empty");
+      throw new StackException("maze.structures.StackException on " + "peek: stack empty");
     }  // end if
 
   } // end peek
@@ -85,4 +87,4 @@ public void displayStack()
     current = current.getNext();
   }
 }
-}  // end StackReferenceBased
+}  // end maze.structures.StackReferenceBased

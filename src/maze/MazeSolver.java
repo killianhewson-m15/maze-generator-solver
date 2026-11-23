@@ -1,3 +1,8 @@
+package maze;
+
+import maze.structures.QueueArrayBased;
+import maze.structures.StackReferenceBased;
+
 public class MazeSolver
 {
     private final Maze maze;
