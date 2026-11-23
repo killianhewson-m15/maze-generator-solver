@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 public class Main
 {
@@ -7,17 +8,10 @@ public class Main
     {
         SwingUtilities.invokeLater(() -> {
             Maze maze = new Maze(10, 10);
-
             MazeGenerator generator = new MazeGenerator(maze);
-            generator.generate();
-
-            MazeSolver solver = new MazeSolver(maze);
-            solver.solve();
-
-            System.out.println("Maze solved: " + solver.isSolved());
 
             MazePanel panel = new MazePanel(maze);
-            panel.setSolutionPath(solver.getPath());
+            panel.setCurrentCell(generator.getCurrentCell());
 
             JFrame frame = new JFrame("Maze Generator and Solver");
 
@@ -27,6 +21,27 @@ public class Main
             frame.setResizable(false);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+
+            Timer timer = new Timer(30, event -> {
+                generator.step();
+
+                panel.setCurrentCell(generator.getCurrentCell());
+
+                if (generator.isFinished())
+                {
+                    ((Timer) event.getSource()).stop();
+
+                    MazeSolver solver = new MazeSolver(maze);
+                    solver.solve();
+
+                    panel.setSolutionPath(solver.getPath());
+
+                    System.out.println(
+                            "Maze solved: " + solver.isSolved());
+                }
+            });
+
+            timer.start();
         });
     }
 }

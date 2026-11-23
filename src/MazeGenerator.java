@@ -64,4 +64,14 @@ public class MazeGenerator
             step();
         }
     }
+
+    public Cell getCurrentCell()
+    {
+        if (isFinished())
+        {
+            return null;
+        }
+
+        return (Cell) stack.peek();
+    }
 }
