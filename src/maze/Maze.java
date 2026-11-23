@@ -1,11 +1,13 @@
 package maze;
 
+// Stores the grid and manages the walls between cells.
 public class Maze
 {
     private final int rows;
     private final int columns;
     private final Cell[][] grid;
 
+    // Creates a grid with all walls initially present.
     public Maze(int rows, int columns)
     {
         if (rows <= 0 || columns <= 0)
@@ -37,12 +39,14 @@ public class Maze
         return columns;
     }
 
+    // Checks whether a position is inside the grid.
     public boolean isInBounds(int row, int column)
     {
         return row >= 0 && row < rows
                 && column >= 0 && column < columns;
     }
 
+    // Returns null for positions outside the maze.
     public Cell getCell(int row, int column)
     {
         if (!isInBounds(row, column))
@@ -53,6 +57,7 @@ public class Maze
         return grid[row][column];
     }
 
+    // Returns neighbours in top, right, bottom, left order; boundary entries are null.
     public Cell[] getNeighbours(Cell cell)
     {
         int row = cell.getRow();
@@ -66,6 +71,7 @@ public class Maze
         };
     }
 
+    // Opens a passage by removing the matching walls from two adjacent cells.
     public void removeWallBetween(Cell first, Cell second)
     {
         if (first == null || second == null)
@@ -83,6 +89,7 @@ public class Maze
         int rowDifference = second.getRow() - first.getRow();
         int columnDifference = second.getColumn() - first.getColumn();
 
+        // Direct neighbours differ by one row or one column, but not both.
         if (Math.abs(rowDifference) + Math.abs(columnDifference) != 1)
         {
             throw new IllegalArgumentException(

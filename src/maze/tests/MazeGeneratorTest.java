@@ -5,8 +5,10 @@ import maze.Maze;
 import maze.MazeGenerator;
 import maze.structures.StackReferenceBased;
 
+// Checks that generated mazes are connected and have consistent walls with no cycles.
 public class MazeGeneratorTest
 {
+    // Repeats each size to check different random layouts and edge cases.
     public static void main(String[] args)
     {
         int[][] sizes = {
@@ -32,6 +34,7 @@ public class MazeGeneratorTest
         System.out.println("All generation checks passed.");
     }
 
+    // Checks visited cells, outer walls, shared walls, passages and connectivity.
     private static void checkMaze(Maze maze)
     {
         int totalCells = maze.getRows() * maze.getColumns();
@@ -75,6 +78,7 @@ public class MazeGeneratorTest
             }
         }
 
+        // Each passage is counted from both cells; a connected tree has cells - 1 edges.
         int passages = openSides / 2;
 
         check(passages == totalCells - 1,
@@ -84,6 +88,7 @@ public class MazeGeneratorTest
                 "Some cells cannot be reached through open passages.");
     }
 
+    // Traverses open passages using a separate seen array to check connectivity.
     private static int countReachableCells(Maze maze)
     {
         boolean[][] seen = new boolean[maze.getRows()][maze.getColumns()];
@@ -118,6 +123,7 @@ public class MazeGeneratorTest
         return count;
     }
 
+    // Keeps wall order consistent with Maze.getNeighbours().
     private static boolean[] getWalls(Cell cell)
     {
         return new boolean[] {
@@ -126,6 +132,7 @@ public class MazeGeneratorTest
         };
     }
 
+    // Stops the test immediately if a required condition fails.
     private static void check(boolean condition, String message)
     {
         if (!condition)

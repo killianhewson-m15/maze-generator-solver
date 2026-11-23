@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Point;
 
+// Handles the controls, dimension input and animated algorithm steps.
 public class MazeAppPanel extends JPanel
 {
     private static final int MAX_DIMENSION = 100;
@@ -35,6 +36,7 @@ public class MazeAppPanel extends JPanel
     private Timer timer;
     private boolean mazeGenerated = false;
 
+    // Builds the controls, scrollable maze area and status message.
     public MazeAppPanel()
     {
         setLayout(new BorderLayout());
@@ -70,6 +72,7 @@ public class MazeAppPanel extends JPanel
         resetMaze();
     }
 
+    // Creates a fresh maze and advances generation once per timer event.
     private void generateMaze()
     {
         if (!resetMaze())
@@ -84,6 +87,7 @@ public class MazeAppPanel extends JPanel
         statusLabel.setText("Generating maze...");
 
         timer = new Timer(30, event -> {
+            // Ignore any queued event from an old timer after a reset.
             if (event.getSource() != timer)
             {
                 return;
@@ -108,6 +112,7 @@ public class MazeAppPanel extends JPanel
         timer.start();
     }
 
+    // Animates BFS, then displays the solution and its number of moves.
     private void solveMaze()
     {
         if (!mazeGenerated)
@@ -125,6 +130,7 @@ public class MazeAppPanel extends JPanel
         statusLabel.setText("Searching for the exit...");
 
         timer = new Timer(30, event -> {
+            // Ignore any queued event from an old timer after a reset.
             if (event.getSource() != timer)
             {
                 return;
@@ -158,6 +164,7 @@ public class MazeAppPanel extends JPanel
         timer.start();
     }
 
+    // Validates dimensions before replacing the maze; returns false for invalid input.
     private boolean resetMaze()
     {
         int rows;
@@ -186,6 +193,7 @@ public class MazeAppPanel extends JPanel
             return false;
         }
 
+        // Validation passed, so the old animation and maze can now be replaced.
         stopTimer();
 
         maze = new Maze(rows, columns);
@@ -207,6 +215,7 @@ public class MazeAppPanel extends JPanel
         return true;
     }
 
+    // Prevents conflicting actions during animation; Reset remains available.
     private void setBusy(boolean busy)
     {
         generateButton.setEnabled(!busy);
@@ -216,6 +225,7 @@ public class MazeAppPanel extends JPanel
         columnsField.setEnabled(!busy);
     }
 
+    // Stops the current animation and clears the active timer reference.
     private void stopTimer()
     {
         if (timer != null)

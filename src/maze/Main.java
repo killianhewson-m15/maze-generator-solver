@@ -8,6 +8,7 @@ import java.awt.Dimension;
 
 public class Main
 {
+    // Opens the application window on Swing's event dispatch thread.
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(() -> {

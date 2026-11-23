@@ -5,8 +5,10 @@ import maze.Maze;
 import maze.MazeGenerator;
 import maze.MazeSolver;
 
+// Checks solutions for generated mazes and handles an unreachable exit.
 public class MazeSolverTest
 {
+    // Tests several maze sizes, including single-cell, narrow and rectangular mazes.
     public static void main(String[] args)
     {
         int[][] sizes = {
@@ -37,6 +39,7 @@ public class MazeSolverTest
                     + size[1] + " (10 runs)");
         }
 
+        // With every wall intact, the exit must be reported as unreachable.
         Maze blockedMaze = new Maze(2, 2);
         MazeSolver blockedSolver = new MazeSolver(blockedMaze);
         blockedSolver.solve();
@@ -57,6 +60,7 @@ public class MazeSolverTest
         System.out.println("All search and path checks passed.");
     }
 
+    // Checks endpoints, repeated cells and that every step follows an open passage.
     private static void checkPath(Maze maze, MazeSolver solver)
     {
         Cell[] path = solver.getPath();
@@ -92,6 +96,7 @@ public class MazeSolverTest
             int rowDifference = current.getRow() - previous.getRow();
             int columnDifference = current.getColumn() - previous.getColumn();
 
+            // Consecutive cells must be adjacent with both shared walls removed.
             boolean connected =
                     (rowDifference == -1 && columnDifference == 0
                             && !previous.hasTopWall() && !current.hasBottomWall())

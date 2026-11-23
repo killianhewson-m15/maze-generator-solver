@@ -3,8 +3,10 @@ package maze.tests;
 import maze.structures.QueueArrayBased;
 import maze.structures.QueueException;
 
+// Checks queue capacity, FIFO order, wraparound and error handling.
 public class QueueArrayBasedTest
 {
+    // Tests custom capacities and checks the original default capacity is unchanged.
     public static void main(String[] args)
     {
         for (int capacity : new int[] {1, 3, 50, 900})
@@ -43,6 +45,7 @@ public class QueueArrayBasedTest
         System.out.println("All queue checks passed.");
     }
 
+    // Checks normal queue operations, overflow, underflow and reuse after clearing.
     private static void checkCapacity(int capacity)
     {
         QueueArrayBased queue = new QueueArrayBased(capacity);
@@ -93,6 +96,7 @@ public class QueueArrayBasedTest
             // Correct: dequeue must reject removal when empty.
         }
 
+        // Clearing must empty the queue without changing its capacity.
         queue.enqueue("reset check");
         queue.dequeueAll();
 
@@ -107,6 +111,7 @@ public class QueueArrayBasedTest
                 "Reset should preserve the chosen capacity.");
     }
 
+    // Stops the test immediately if a required condition fails.
     private static void check(boolean condition, String message)
     {
         if (!condition)

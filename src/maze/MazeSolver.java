@@ -3,6 +3,7 @@ package maze;
 import maze.structures.QueueArrayBased;
 import maze.structures.StackReferenceBased;
 
+// Uses breadth-first search to find a shortest route from start to exit.
 public class MazeSolver
 {
     private final Maze maze;
@@ -14,10 +15,12 @@ public class MazeSolver
     private boolean finished = false;
     private boolean solved = false;
 
+    // Clears the visited state and adds the start cell to the search queue.
     public MazeSolver(Maze maze)
     {
         this.maze = maze;
 
+        // Each cell enters the queue at most once, so this capacity is sufficient.
         queue = new QueueArrayBased(
                 maze.getRows() * maze.getColumns());
 
@@ -60,6 +63,7 @@ public class MazeSolver
         return predecessors[cell.getRow()][cell.getColumn()];
     }
 
+    // Processes one queued cell and discovers neighbours through open passages.
     public void step()
     {
         if (isFinished())
@@ -79,6 +83,7 @@ public class MazeSolver
 
         Cell[] neighbours = maze.getNeighbours(current);
 
+        // Wall order matches the neighbour order: top, right, bottom, left.
         boolean[] walls = {
                 current.hasTopWall(), current.hasRightWall(),
                 current.hasBottomWall(), current.hasLeftWall()
@@ -90,6 +95,7 @@ public class MazeSolver
 
             if (next != null && !walls[direction] && !next.isVisited())
             {
+                // Mark on enqueue to avoid duplicates and remember the first route here.
                 next.setVisited(true);
 
                 predecessors[next.getRow()][next.getColumn()] = current;
@@ -98,12 +104,14 @@ public class MazeSolver
             }
         }
 
+        // An empty queue means there are no more reachable cells to search.
         if (queue.isEmpty())
         {
             finished = true;
         }
     }
 
+    // Runs the search to completion without animation.
     public void solve()
     {
         while (!isFinished())
@@ -112,6 +120,7 @@ public class MazeSolver
         }
     }
 
+    // Returns the solution in start-to-exit order, or an empty array if unsolved.
     public Cell[] getPath()
     {
         if (!isSolved())

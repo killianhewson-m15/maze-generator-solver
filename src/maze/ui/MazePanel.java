@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+// Draws the maze walls and the current search or solution state.
 public class MazePanel extends JPanel
 {
     private static final int CELL_SIZE = 30;
@@ -18,6 +19,7 @@ public class MazePanel extends JPanel
     private Cell currentCell;
     private boolean showVisited = false;
 
+    // Uses fixed-size cells; the surrounding scroll pane handles larger mazes.
     public MazePanel(Maze maze)
     {
         this.maze = maze;
@@ -47,6 +49,7 @@ public class MazePanel extends JPanel
         repaint();
     }
 
+    // Draws cell colours first, then walls so the grid stays visible.
     @Override
     protected void paintComponent(Graphics g)
     {

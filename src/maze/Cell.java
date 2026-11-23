@@ -1,7 +1,9 @@
 package maze;
 
+// Stores one cell's position, walls and visited state.
 public class Cell
 {
+    // Coordinates are zero-based: rows go down and columns go right.
     private final int row;
     private final int column;
 
