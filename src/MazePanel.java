@@ -11,6 +11,7 @@ public class MazePanel extends JPanel
     private final Maze maze;
     private Cell[] solutionPath = new Cell[0];
     private Cell currentCell;
+    private boolean showVisited = false;
 
     public MazePanel(Maze maze)
     {
@@ -35,12 +36,40 @@ public class MazePanel extends JPanel
         repaint();
     }
 
+    public void setShowVisited(boolean showVisited)
+    {
+        this.showVisited = showVisited;
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g)
     {
         super.paintComponent(g);
 
-        // Draw the solution path in green.
+        // Show cells discovered during BFS.
+        if (showVisited)
+        {
+            g.setColor(new Color(173, 216, 230));
+
+            for (int row = 0; row < maze.getRows(); row++)
+            {
+                for (int column = 0; column < maze.getColumns(); column++)
+                {
+                    Cell cell = maze.getCell(row, column);
+
+                    if (cell.isVisited())
+                    {
+                        int x = PADDING + column * CELL_SIZE;
+                        int y = PADDING + row * CELL_SIZE;
+
+                        g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+                    }
+                }
+            }
+        }
+
+        // Draw the final solution over the discovered cells.
         g.setColor(new Color(144, 238, 144));
 
         for (Cell cell : solutionPath)
@@ -51,7 +80,7 @@ public class MazePanel extends JPanel
             g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
         }
 
-        // Highlight the current cell in orange.
+        // Highlight the current cell.
         if (currentCell != null)
         {
             g.setColor(new Color(255, 200, 100));
@@ -62,7 +91,7 @@ public class MazePanel extends JPanel
             g.fillRect(x, y, CELL_SIZE, CELL_SIZE);
         }
 
-        // Draw walls over the coloured cells.
+        // Keep the walls visible over every colour.
         g.setColor(Color.BLACK);
 
         for (int row = 0; row < maze.getRows(); row++)

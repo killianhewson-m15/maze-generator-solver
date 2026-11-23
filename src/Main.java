@@ -22,7 +22,7 @@ public class Main
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
 
-            Timer timer = new Timer(30, event -> {
+            Timer generationTimer = new Timer(30, event -> {
                 generator.step();
 
                 panel.setCurrentCell(generator.getCurrentCell());
@@ -30,18 +30,39 @@ public class Main
                 if (generator.isFinished())
                 {
                     ((Timer) event.getSource()).stop();
-
-                    MazeSolver solver = new MazeSolver(maze);
-                    solver.solve();
-
-                    panel.setSolutionPath(solver.getPath());
-
-                    System.out.println(
-                            "Maze solved: " + solver.isSolved());
+                    startSolving(maze, panel);
                 }
             });
 
-            timer.start();
+            generationTimer.start();
         });
+    }
+
+    private static void startSolving(Maze maze, MazePanel panel)
+    {
+        MazeSolver solver = new MazeSolver(maze);
+
+        panel.setCurrentCell(null);
+        panel.setSolutionPath(new Cell[0]);
+        panel.setShowVisited(true);
+
+        Timer solverTimer = new Timer(30, event -> {
+            solver.step();
+
+            panel.setCurrentCell(solver.getCurrentCell());
+
+            if (solver.isFinished())
+            {
+                ((Timer) event.getSource()).stop();
+
+                panel.setCurrentCell(null);
+                panel.setSolutionPath(solver.getPath());
+
+                System.out.println(
+                        "Maze solved: " + solver.isSolved());
+            }
+        });
+
+        solverTimer.start();
     }
 }

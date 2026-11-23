@@ -5,6 +5,7 @@ public class MazeSolver
     private final Cell[][] predecessors;
     private final Cell exit;
 
+    private Cell currentCell;
     private boolean finished = false;
     private boolean solved = false;
 
@@ -20,6 +21,7 @@ public class MazeSolver
         exit = maze.getCell(
                 maze.getRows() - 1, maze.getColumns() - 1);
 
+        // Reset the visited flags left by maze generation.
         for (int row = 0; row < maze.getRows(); row++)
         {
             for (int column = 0; column < maze.getColumns(); column++)
@@ -43,6 +45,11 @@ public class MazeSolver
         return solved;
     }
 
+    public Cell getCurrentCell()
+    {
+        return currentCell;
+    }
+
     public Cell getPredecessor(Cell cell)
     {
         return predecessors[cell.getRow()][cell.getColumn()];
@@ -55,7 +62,8 @@ public class MazeSolver
             return;
         }
 
-        Cell current = (Cell) queue.dequeue();
+        currentCell = (Cell) queue.dequeue();
+        Cell current = currentCell;
 
         if (current == exit)
         {
@@ -110,6 +118,7 @@ public class MazeSolver
         Cell current = exit;
         int length = 0;
 
+        // Follow predecessor links from the exit back to the start.
         while (current != null)
         {
             pathStack.push(current);
@@ -119,6 +128,7 @@ public class MazeSolver
 
         Cell[] path = new Cell[length];
 
+        // Reverse the order so the path runs from start to exit.
         for (int i = 0; i < length; i++)
         {
             path[i] = (Cell) pathStack.pop();
